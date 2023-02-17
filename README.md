@@ -1,5 +1,35 @@
 # Welcome to my dotfiles!
+
 here are my current dotfiles for macos, and everything I use
 
-# TODO:
-add a list of all my apps i'm using
+# App List
+
+## Browsers
+
+- Chrome
+- Arc
+
+## Getting Better Experiance
+
+- Smooze Pro
+- AltTab
+- Magnet
+- Discord
+- Office
+- SoundSource
+- IINA
+- nvim
+- yabai
+- skhd
+- utorrent
+
+## Others
+
+- Avast
+- IPTVSmartersPro
+- Logi Options+
+- BetterDisplay
+- FastestVPN
+- balenaEtcher
+- CleanMyMac X
+- Bartender (?)
