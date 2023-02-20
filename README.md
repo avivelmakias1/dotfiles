@@ -22,6 +22,7 @@ here are my current dotfiles for macos, and everything I use
 - yabai
 - skhd
 - utorrent
+- iTerm 2
 
 ## Others
 
