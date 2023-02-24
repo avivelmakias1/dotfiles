@@ -1,12 +1,11 @@
 return {
   -- add gnuvbox
-  { "dracula/vim" },
-
+  { "folke/tokyonight.nvim" },
   -- Configure LazyVim to load gruvbox
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "dracula",
+      colorscheme = "tokyonight-night",
     },
   },
 }
