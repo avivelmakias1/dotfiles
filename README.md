@@ -28,6 +28,7 @@ here are my current dotfiles for macos, and everything I use
 
 - Avast
 - IPTVSmartersPro
+- Stremio
 - Logi Options+
 - BetterDisplay
 - FastestVPN
