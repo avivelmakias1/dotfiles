@@ -10,7 +10,6 @@ return {
     -- Path passed to `get_venvs`.
     opts.venvs_path = vim.fn.expand("~/venvs")
     -- Something to do after setting an environment
-    opts.post_set_venv = nil
     opts.post_set_venv = function(venv)
       vim.cmd("LspRestart")
       vim.cmd("DapLoadLaunchJSON")
