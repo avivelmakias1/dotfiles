@@ -9,3 +9,10 @@ vim.keymap.set(
   require("telescope.builtin").resume,
   { noremap = true, silent = true, desc = "Resume" }
 )
+
+vim.keymap.set(
+  "n",
+  "<leader>ct",
+  "<CMD>TermExec cmd='source $VIRTUAL_ENV/bin/activate'<CR>",
+  { noremap = true, silent = true, desc = "Source Venv In Terminal" }
+)
