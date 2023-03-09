@@ -4,7 +4,6 @@ theme = "dracula_at_night"
 line-number = "relative"
 mouse = true
 bufferline = "multiple"
-shell = ["/bin/zsh", "-C"]
 completion-trigger-len = 1
 
 [editor.cursor-shape]
