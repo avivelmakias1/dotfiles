@@ -1,8 +1,7 @@
-tt.*
-.tests
-doc/tags
-debug
-.repro
-foo.*
-*.log
-data
+plugin
+custom
+spell
+ftplugin
+coc-settings.json
+.luarc.json
+lazy-lock.json
