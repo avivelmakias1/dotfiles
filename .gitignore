@@ -1,4 +1,5 @@
 # Gitignore for the following technologies: macOS
+$HOME
 
 # General
 .DS_Store
@@ -30,3 +31,16 @@ Temporary Items
 # iCloud generated files
 *.icloud
 
+# Other nvims
+nvim.*
+
+# Terminals
+kitty
+iterm2
+lazygit
+
+# Dont look
+karabiner
+emacs
+doom
+Pinta
