@@ -2,6 +2,7 @@ return {
   {
     -- Optional
     'williamboman/mason.nvim',
+    event = "VeryLazy",
     opts = {
       ensure_installed = {
         -- lua stuff
@@ -21,6 +22,7 @@ return {
   },
   {
     'williamboman/mason-lspconfig.nvim',
+    event = "VeryLazy",
     dependencies = {
       'williamboman/mason.nvim',
       'neovim/nvim-lspconfig',

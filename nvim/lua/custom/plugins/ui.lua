@@ -4,6 +4,7 @@ return {
   },
   {
     'akinsho/bufferline.nvim',
+    event = 'VeryLazy',
     opts = {
       options = {
         close_command = 'Bdelete! %d',
@@ -22,6 +23,7 @@ return {
   },
   {
     'utilyre/barbecue.nvim',
+    event = 'VeryLazy',
     name = 'barbecue',
     version = '*',
     dependencies = {
@@ -34,6 +36,7 @@ return {
   },
   {
     'goolord/alpha-nvim',
+    event = 'VimEnter',
     requires = { 'nvim-tree/nvim-web-devicons' },
     config = function()
       require('alpha').setup(require('alpha.themes.startify').config)

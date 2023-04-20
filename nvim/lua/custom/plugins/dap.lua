@@ -270,6 +270,13 @@ return {
         end,
         desc = 'show threads',
       },
+      {
+        '<leader>dtm',
+        function ()
+          require('dap-python').test_method()
+        end,
+        desc = 'test method'
+      }
     },
   },
 }
