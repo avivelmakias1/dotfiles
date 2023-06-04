@@ -3,6 +3,7 @@ vim.keymap.set('n', ';', ':')
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+vim.keymap.set('n', 'U', '<C-r>', { noremap = true, silent = true })
 
 -- Movement
 vim.keymap.set('n', '<C-h>', '<C-w>h') -- move left
@@ -14,6 +15,7 @@ vim.keymap.set('i', '<C-h>', '<Left>')
 vim.keymap.set('i', '<C-j>', '<Down>')
 vim.keymap.set('i', '<C-k>', '<Up>')
 vim.keymap.set('i', '<C-l>', '<Right>')
+
 -- Workspaces
 vim.keymap.set('n', '<leader>wa', '<cmd>WorkspacesAdd<cr>', { desc = 'Add Workspace' })
 vim.keymap.set('n', '<leader>wr', '<cmd>WorkspacesRemove<cr>', { desc = 'Remove Current Workspace' })
@@ -40,7 +42,7 @@ vim.keymap.set('n', '<leader>ca', '<cmd>CodeActionMenu<cr>', { desc = 'Code Acti
 vim.keymap.set('n', '<leader>qq', '<cmd>TroubleToggle document_diagnostics<cr>', { desc = 'Trouble Document' })
 vim.keymap.set('n', '<leader>qw', '<cmd>TroubleToggle workspace_diagnostics<cr>', { desc = 'Trouble Workspace' })
 vim.keymap.set('n', '<leader>ql', function()
-  vim.diagnostic.config { virtual_text = not require('lsp_lines').toggle()}
+  vim.diagnostic.config { virtual_text = not require('lsp_lines').toggle() }
 end, {
   desc = 'multiple error lines',
 })
@@ -59,6 +61,12 @@ vim.keymap.set('n', '<leader>lf', function(bufnr)
     bufnr = bufnr,
   }
 end, { desc = 'LSP Format' })
+
+vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', { desc = 'LSP Definition' })
+vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', { desc = 'LSP Implementation' })
+vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', { desc = 'LSP References' })
+vim.keymap.set('n', 'gtd', '<cmd>lua vim.lsp.buf.type_definition()<cr>', { desc = 'LSP Type Definition' })
+vim.keymap.set('n', '<leader>lr', '<cmd>lua vim.lsp.buf.rename()<cr>', { desc = 'LSP Rename' })
 
 -- Git Related
 vim.keymap.set('n', '<leader>gi', '<cmd>Gitignore<cr>', { desc = 'Generate gitignore' })

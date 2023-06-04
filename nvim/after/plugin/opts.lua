@@ -42,8 +42,6 @@ vim.o.termguicolors = true
 
 vim.o.wrap = false
 
-vim.cmd[[let g:sonokai_style = 'andromeda']]
-vim.cmd[[let g:sonokai_better_performance = 1]]
+vim.o.scrolloff = 10
 
-vim.cmd [[hi NonText guifg=bg]]
-vim.cmd [[colorscheme sonokai]]
+vim.cmd [[colorscheme kanagawa]]

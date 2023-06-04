@@ -1,28 +1,28 @@
 return {
   {
     'kdheepak/lazygit.nvim',
-    event = "VeryLazy",
+    event = 'VeryLazy',
   },
   {
     'tpope/vim-fugitive',
-    event = "VeryLazy",
+    event = 'VeryLazy',
   },
   {
     'APZelos/blamer.nvim',
-    event = "VeryLazy",
+    event = { 'BufReadPre', 'BufNewFile' },
   },
   {
     'tpope/vim-rhubarb',
-    event = "VeryLazy",
+    event = 'VeryLazy',
   },
   {
     'wintermute-cell/gitignore.nvim',
-    event = "VeryLazy",
+    event = 'VeryLazy',
   },
   {
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
-    event = 'VeryLazy',
+    event = { 'BufReadPre', 'BufNewFile' },
     opts = {
       -- See `:help gitsigns.txt`
       signs = {

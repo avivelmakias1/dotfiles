@@ -21,4 +21,10 @@ return {
       require('better_escape').setup()
     end,
   },
+  {
+    "chrishrb/gx.nvim",
+    event = { "BufEnter" },
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = true, -- default settings
+  },
 }

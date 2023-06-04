@@ -1,3 +1,5 @@
 return {
-  'sainnhe/sonokai'
+  {
+    "rebelot/kanagawa.nvim"
+  }
 }

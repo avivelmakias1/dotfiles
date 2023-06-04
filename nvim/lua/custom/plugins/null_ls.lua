@@ -1,27 +1,34 @@
 return {
   {
-    'jose-elias-alvarez/null-ls.nvim',
+    'jay-babu/mason-null-ls.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
+    dependencies = {
+      'williamboman/mason.nvim',
+      'jose-elias-alvarez/null-ls.nvim',
+    },
     config = function()
-      local null_ls = require 'null-ls'
-
-      null_ls.setup {
-        diagnostics_format = '[#{c}] #{m} (#{s})',
-        sources = {
-          null_ls.builtins.formatting.stylua,
-          null_ls.builtins.formatting.prettierd,
-          null_ls.builtins.formatting.black,
-          null_ls.builtins.formatting.isort,
-          null_ls.builtins.formatting.ruff,
-
-          null_ls.builtins.diagnostics.eslint,
-          null_ls.builtins.diagnostics.ruff,
-
-          null_ls.builtins.code_actions.eslint_d,
-
-          -- null_ls.builtins.completion.spell,
+      require('mason').setup()
+      require('mason-null-ls').setup {
+        ensure_installed = {
+          -- Opt to list sources here, when available in mason.
+          'lua-language-server',
+          'stylua',
+          'pyright',
+          -- 'ruff',
+          -- 'ruff_lsp',
+          'isort',
+          'black',
+          'eslint_d',
+          'prettierd',
+          'typescript-language-server',
+          'css-lsp',
+          'html-lsp',
+          'json-lsp',
         },
+        automatic_installation = true,
+        handlers = {},
       }
+      require('null-ls').setup()
     end,
   },
-  'jose-elias-alvarez/typescript.nvim',
 }
