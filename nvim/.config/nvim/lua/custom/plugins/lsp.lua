@@ -1,47 +1,105 @@
 return {
   {
     'VonHeikemen/lsp-zero.nvim',
-    branch = 'v2.x',
-    lazy = true,
+    branch = 'v3.x',
+    dependencies = {
+      { 'neovim/nvim-lspconfig' },
+      {
+        'williamboman/mason.nvim',
+        build = function()
+          pcall(vim.cmd, 'MasonUpdate')
+        end,
+      },
+      { 'williamboman/mason-lspconfig.nvim' },
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'hrsh7th/nvim-cmp' },
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'hrsh7th/cmp-buffer' }, -- Required
+      { 'hrsh7th/cmp-path' }, -- Required
+    },
     config = function()
       -- This is where you modify the settings for lsp-zero
       -- Note: autocompletion settings will not take effect
+      local lsp_zero = require 'lsp-zero'
 
-      require('lsp-zero.settings').preset {}
-    end,
-  },
-  -- Autocompletion
-  {
-    'hrsh7th/nvim-cmp',
-    event = 'InsertEnter',
-    dependencies = {
-      {
-        'L3MON4D3/LuaSnip',
-        'hrsh7th/cmp-buffer', -- Required
-        'hrsh7th/cmp-path', -- Required
-        'hrsh7th/cmp-nvim-lsp', -- Required
-      },
-    },
-    config = function()
-      -- Here is where you configure the autocompletion settings.
-      -- The arguments for .extend() have the same shape as `manage_nvim_cmp`:
-      -- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/api-reference.md#manage_nvim_cmp
+      lsp_zero.on_attach(function(client, bufnr)
+        -- see :help lsp-zero-keybindings
+        -- to learn the available actions
+        lsp_zero.default_keymaps { buffer = bufnr }
+      end)
 
+      require('mason').setup()
+      require('mason-lspconfig').setup {
+        ensure_installed = {
+          'lua_ls',
+          'cssls',
+          'html',
+          -- 'pylsp',
+          'pyright',
+          -- 'ruff_lsp',
+        },
+        handlers = {
+          lsp_zero.default_setup,
+          lua_ls = function()
+            local lua_opts = lsp_zero.nvim_lua_ls()
+            require('lspconfig').lua_ls.setup(lua_opts)
+          end,
+        },
+      }
+      -- This is where all the LSP shenanigans will live
+
+      local lspconfig = require 'lspconfig'
+
+      -- -- (Optional) Configure lua language server for neovim
+      -- lspconfig.lua_ls.setup(lsp_zero.nvim_lua_ls())
+
+      lspconfig.pyright.setup {
+        root_dir = function(p)
+          local path = lspconfig.util.root_pattern('.git', 'setup.cfg', 'requirements.txt')(p)
+          return path
+        end,
+      }
+      lspconfig.tsserver.setup {
+        root_dir = function(p)
+          local path = lspconfig.util.root_pattern('.prettierrc', 'nx.json', 'tsconfig.base.json')(p)
+          return path
+        end,
+        settings = {
+          typescript = {
+            inlayHints = {
+              includeInlayParameterNameHints = 'all',
+              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = true,
+              includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayEnumMemberValueHints = true,
+            },
+          },
+          javascript = {
+            inlayHints = {
+              includeInlayParameterNameHints = 'all',
+              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = true,
+              includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayEnumMemberValueHints = true,
+            },
+          },
+        },
+      }
+
+      lsp_zero.setup()
       require('lsp-zero.cmp').extend()
 
       -- And you can configure cmp even more, if you want to.
       local cmp = require 'cmp'
       local lspkind = require 'lspkind'
-      local luasnip = require 'luasnip'
-
-      luasnip.config.setup {}
 
       cmp.setup {
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
-        },
         formatting = {
           fields = { 'kind', 'abbr', 'menu' },
           format = lspkind.cmp_format {
@@ -65,19 +123,11 @@ return {
             select = true,
           },
           ['<Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            else
-              fallback()
-            end
+            fallback()
           end, { 'i', 's' }),
           ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
             else
               fallback()
             end
@@ -85,7 +135,6 @@ return {
         },
         sources = {
           { name = 'nvim_lsp' },
-          { name = 'luasnip' },
           { name = 'path' },
         },
       }
@@ -98,165 +147,6 @@ return {
       end)
     end,
   },
-  {
-    'neovim/nvim-lspconfig',
-    cmd = 'LspInfo',
-    event = { 'BufReadPre', 'BufNewFile' },
-    dependencies = {
-      { 'hrsh7th/cmp-nvim-lsp' },
-      {
-        'williamboman/mason.nvim',
-        build = function()
-          pcall(vim.cmd, 'MasonUpdate')
-        end,
-      },
-      {
-        'williamboman/mason-lspconfig.nvim',
-        setup = function()
-          require('mason').setup()
-          require('mason-lspconfig').setup {
-            ensure_installed = {
-              'lua_ls',
-              'cssls',
-              'html',
-              -- 'pylsp',
-              'pyright',
-              -- 'ruff_lsp',
-            },
-          }
-        end,
-      },
-      { 'VonHeikemen/lsp-zero.nvim' },
-    },
-    config = function()
-      -- This is where all the LSP shenanigans will live
-
-      local lsp = require('lsp-zero').preset {}
-      local lspconfig = require 'lspconfig'
-
-      lsp.on_attach(function(client, bufnr)
-        lsp.default_keymaps { buffer = bufnr }
-      end)
-
-      -- (Optional) Configure lua language server for neovim
-      lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
-
-      lspconfig.pyright.setup {
-        root_dir = function(p)
-          local path = lspconfig.util.root_pattern('.git', 'setup.cfg', 'requirements.txt')(p)
-          return path
-        end,
-      }	
-      lspconfig.tsserver.setup {
-        root_dir = function(p)
-          local path = lspconfig.util.root_pattern('.prettierrc', 'nx.json', 'tsconfig.base.json')(p)
-          return path
-        end,
-      }
-
-      lsp.setup()
-    end,
-  },
-  -- {
-  --   'VonHeikemen/lsp-zero.nvim',
-  --   branch = 'v2.x',
-  --   lazy = true,
-  --   config = function()
-  --     -- This is where you modify the settings for lsp-zero
-  --     -- Note: autocompletion settings will not take effect
-  --
-  --     require('lsp-zero.settings').preset {}
-  --   end,
-  -- },
-  --
-  -- -- Autocompletion
-  -- {
-  --   'hrsh7th/nvim-cmp',
-  --   event = 'InsertEnter',
-  --   dependencies = {
-  --     { 'L3MON4D3/LuaSnip' },
-  --   },
-  --   config = function()
-  --     -- Here is where you configure the autocompletion settings.
-  --     -- The arguments for .extend() have the same shape as `manage_nvim_cmp`:
-  --     -- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/api-reference.md#manage_nvim_cmp
-  --
-  --     require('lsp-zero.cmp').extend()
-  --
-  --     -- And you can configure cmp even more, if you want to.
-  --     local cmp = require 'cmp'
-  --     local cmp_action = require('lsp-zero.cmp').action()
-  --
-  --     cmp.setup {
-  --       mapping = {
-  --         ['<C-Space>'] = cmp.mapping.complete(),
-  --         ['<C-f>'] = cmp_action.luasnip_jump_forward(),
-  --         ['<C-b>'] = cmp_action.luasnip_jump_backward(),
-  --       },
-  --     }
-  --   end,
-  -- },
-  --
-  -- -- LSP
-  -- {
-  --   'neovim/nvim-lspconfig',
-  --   cmd = 'LspInfo',
-  --   event = { 'BufReadPre', 'BufNewFile' },
-  --   dependencies = {
-  --     { 'hrsh7th/cmp-nvim-lsp' },
-  --     { 'williamboman/mason-lspconfig.nvim' },
-  --     { 'jose-elias-alvarez/typescript.nvim' },
-  --     {
-  --       'williamboman/mason.nvim',
-  --       build = function()
-  --         pcall(vim.cmd, 'MasonUpdate')
-  --       end,
-  --     },
-  --   },
-  --   config = function()
-  --     -- This is where all the LSP shenanigans will live
-  --
-  --     local lsp = require 'lsp-zero'
-  --
-  --     lsp.on_attach(function(client, bufnr)
-  --       lsp.default_keymaps { buffer = bufnr }
-  --     end)
-  --
-  --     lsp.skip_server_setup { 'tsserver' }
-  --
-  --     -- (Optional) Configure lua language server for neovim
-  --     require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
-  --
-  --     lsp.setup()
-  --
-  --     require('typescript').setup {
-  --       server = {
-  --         on_attach = function(client, bufnr)
-  --           -- You can find more commands in the documentation:
-  --           -- https://github.com/jose-elias-alvarez/typescript.nvim#commands
-  --
-  --           vim.keymap.set('n', '<leader>ci', '<cmd>TypescriptAddMissingImports<cr>', { buffer = bufnr })
-  --         end,
-  --       },
-  --     }
-  --   end,
-  -- },
-  -- {
-  --   'windwp/nvim-autopairs',
-  --   event = 'VeryLazy',
-  --
-  --   opts = {
-  --     fast_wrap = {},
-  --     disable_filetype = { 'TelescopePrompt', 'vim' },
-  --   },
-  --   config = function(_, opts)
-  --     require('nvim-autopairs').setup(opts)
-  --
-  --     -- setup cmp for autopairs
-  --     local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
-  --     require('cmp').event:on('confirm_done', cmp_autopairs.on_confirm_done())
-  --   end,
-  -- },
   {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',

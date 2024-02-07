@@ -1,4 +1,4 @@
-vim.keymap.set('n', ';', ':')
+-- vim.keymap.set('n', ';', ':')
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
@@ -16,14 +16,18 @@ vim.keymap.set('i', '<C-j>', '<Down>')
 vim.keymap.set('i', '<C-k>', '<Up>')
 vim.keymap.set('i', '<C-l>', '<Right>')
 
-vim.keymap.set('n', 'ha', '<cmd>lua require("harpoon.mark").add_file()<cr>', { desc = 'Add mark' })
-vim.keymap.set('n', 'hv', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', { desc = 'Show all marks' })
-vim.keymap.set('n', 'hd', '<cmd>lua require("harpoon.ui").nav_prev()<cr>', { desc = 'Show all marks' })
-vim.keymap.set('n', 'hf', '<cmd>lua require("harpoon.ui").nav_next()<cr>', { desc = 'Show all marks' })
+vim.keymap.set('n', 'ha', '<cmd>lua require("harpoon.mark").add_file()<cr>', { desc = 'Add mark'})
+vim.keymap.set('n', 'hv', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', { desc = 'Show all marks'})
+vim.keymap.set('n', 'hd', '<cmd>lua require("harpoon.ui").nav_prev()<cr>', { desc = 'Show all marks'})
+vim.keymap.set('n', 'hf', '<cmd>lua require("harpoon.ui").nav_next()<cr>', { desc = 'Show all marks'})
 
-vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste without losing buffer" })
 
--- -- Workspaces
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+
+vim.keymap.set('v', 'p', '"_dP', { desc = 'Paste without yanking' })
+
+-- Workspaces
 -- vim.keymap.set('n', '<leader>wa', '<cmd>WorkspacesAdd<cr>', { desc = 'Add Workspace' })
 -- vim.keymap.set('n', '<leader>wr', '<cmd>WorkspacesRemove<cr>', { desc = 'Remove Current Workspace' })
 
@@ -48,21 +52,21 @@ vim.keymap.set('n', '<leader>to', '<cmd>OverseerToggle<cr>', { desc = 'Overseer 
 
 vim.keymap.set('n', '<leader>zm', '<cmd>ZenMode<cr>', { desc = 'Zen Mode' })
 
--- lua fzf
-vim.keymap.set('n', '<leader>ff', '<cmd>lua require("fzf-lua").files()<cr>', { desc = 'Find Files (root dir)' })
-vim.keymap.set('n', '<leader><leader>', '<cmd>lua require("fzf-lua").files()<cr>', { desc = 'Find Files (root dir)' })
-vim.keymap.set('n', '<leader>fg', '<cmd>lua require("fzf-lua").live_grep()<cr>', { desc = 'Grep (root dir)' })
-vim.keymap.set('n', '<leader>fb', '<cmd>lua require("fzf-lua").buffers()<cr>', { desc = 'Buffers' })
-vim.keymap.set('n', '<leader>fh', '<cmd>lua require("fzf-lua").help_tags()<cr>', { desc = 'Help Pages' })
-vim.keymap.set('n', '<leader>fm', '<cmd>lua require("fzf-lua").marks()<cr>', { desc = 'Jump to Mark' })
-vim.keymap.set('n', '<leader>fr', '<cmd>lua require("fzf-lua").resume()<cr>', { desc = 'Resume' })
-vim.keymap.set('n', '<leader>fo', '<cmd>lua require("fzf-lua").oldfiles()<cr>', { desc = 'Old Files' })
-vim.keymap.set('n', '<leader>fw', '<cmd>lua require("fzf-lua").grep_cword()<cr>', { desc = 'Word (root dir)' })
-vim.keymap.set('n', '<leader>fs', '<cmd>lua require("fzf-lua").grep_curbuf()<cr>', { desc = 'Search current buffer' })
-vim.keymap.set('n', '<leader>fc', '<cmd>lua require("fzf-lua").commands()<cr>', { desc = 'Commands' })
-vim.keymap.set('n', '<leader>fa', '<cmd>lua require("fzf-lua").autocommands()<cr>', { desc = 'Auto Commands' })
-vim.keymap.set('n', '<leader>fk', '<cmd>lua require("fzf-lua").keymaps()<cr>', { desc = 'Key Maps' })
-vim.keymap.set('v', '<leader>fw', '<cmd>lua require("fzf-lua").grep_visual()<cr>', { desc = 'Word (root dir)' })
+-- -- lua fzf
+-- vim.keymap.set('n', '<leader>ff', '<cmd>lua require("fzf-lua").files()<cr>', { desc = 'Find Files (root dir)' })
+-- vim.keymap.set('n', '<leader><leader>', '<cmd>lua require("fzf-lua").files()<cr>', { desc = 'Find Files (root dir)' })
+-- vim.keymap.set('n', '<leader>fg', '<cmd>lua require("fzf-lua").live_grep()<cr>', { desc = 'Grep (root dir)' })
+-- vim.keymap.set('n', '<leader>fb', '<cmd>lua require("fzf-lua").buffers()<cr>', { desc = 'Buffers' })
+-- vim.keymap.set('n', '<leader>fh', '<cmd>lua require("fzf-lua").help_tags()<cr>', { desc = 'Help Pages' })
+-- vim.keymap.set('n', '<leader>fm', '<cmd>lua require("fzf-lua").marks()<cr>', { desc = 'Jump to Mark' })
+-- vim.keymap.set('n', '<leader>fr', '<cmd>lua require("fzf-lua").resume()<cr>', { desc = 'Resume' })
+-- vim.keymap.set('n', '<leader>fo', '<cmd>lua require("fzf-lua").oldfiles()<cr>', { desc = 'Old Files' })
+-- vim.keymap.set('n', '<leader>fw', '<cmd>lua require("fzf-lua").grep_cword()<cr>', { desc = 'Word (root dir)' })
+-- vim.keymap.set('n', '<leader>fs', '<cmd>lua require("fzf-lua").grep_curbuf()<cr>', { desc = 'Search current buffer' })
+-- vim.keymap.set('n', '<leader>fc', '<cmd>lua require("fzf-lua").commands()<cr>', { desc = 'Commands' })
+-- vim.keymap.set('n', '<leader>fa', '<cmd>lua require("fzf-lua").autocommands()<cr>', { desc = 'Auto Commands' })
+-- vim.keymap.set('n', '<leader>fk', '<cmd>lua require("fzf-lua").keymaps()<cr>', { desc = 'Key Maps' })
+-- vim.keymap.set('v', '<leader>fw', '<cmd>lua require("fzf-lua").grep_visual()<cr>', { desc = 'Word (root dir)' })
 
 -- Diagnostics
 vim.keymap.set('n', '<leader>qq', '<cmd>TroubleToggle document_diagnostics<cr>', { desc = 'Trouble Document' })
@@ -81,7 +85,7 @@ vim.keymap.set('n', '<leader>qa', '<cmd>qa<cr>', { desc = 'Quit All' })
 
 -- Format Related
 vim.keymap.set('n', '<leader>lf', function()
-  vim.lsp.buf.format { timeout_ms = 2000 }
+  vim.cmd [[Format]]
 end, { desc = 'Format' })
 
 vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', { desc = 'LSP Definition' })
