@@ -1,0 +1,33 @@
+import = [
+    "~/.config/alacritty/themes/aura.toml"
+]
+
+[font]
+size = 18.0
+
+[font.bold]
+family = "Hack Nerd Font Mono"
+style = "Bold"
+
+[font.bold_italic]
+family = "Hack Nerd Font Mono"
+style = "Bold Italic"
+
+[font.italic]
+family = "Hack Nerd Font Mono"
+style = "Italic"
+
+[font.normal]
+family = "Hack Nerd Font Mono"
+style = "Regular"
+
+
+[keyboard]
+bindings = [
+   { key = "Return", mods = "Control|Shift", action = "SpawnNewInstance" }
+]
+
+[[hints.enabled]]
+regex = "[^ ]+\\.rs:\\d+:\\d+"
+command = { program = "code", args = [ "--goto" ] }
+mouse = { enabled = true }
