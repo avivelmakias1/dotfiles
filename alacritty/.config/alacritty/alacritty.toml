@@ -31,3 +31,6 @@ bindings = [
 regex = "[^ ]+\\.rs:\\d+:\\d+"
 command = { program = "code", args = [ "--goto" ] }
 mouse = { enabled = true }
+
+[window]
+option_as_alt = "both"
