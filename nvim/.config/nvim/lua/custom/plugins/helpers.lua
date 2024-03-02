@@ -1,12 +1,5 @@
 return {
   {
-    'ggandor/leap.nvim',
-    lazy = false,
-    config = function()
-      require('leap').add_default_mappings(true)
-    end,
-  },
-  {
     'ThePrimeagen/harpoon',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
@@ -14,14 +7,6 @@ return {
         global_settings = {
           mark_branch = true,
         },
-      }
-    end,
-  },
-  {
-    'kylechui/nvim-surround',
-    config = function()
-      require('nvim-surround').setup {
-        -- Configuration here, or leave empty to use defaults
       }
     end,
   },
