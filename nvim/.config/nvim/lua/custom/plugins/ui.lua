@@ -67,14 +67,6 @@ return {
         enabled = false,
       },
       bottom = {
-        {
-          ft = 'lazyterm',
-          title = 'LazyTerm',
-          size = { height = 0.4 },
-          filter = function(buf)
-            return not vim.b[buf].lazyterm_cmd
-          end,
-        },
         'Trouble',
         { ft = 'qf', title = 'QuickFix' },
         {
