@@ -24,7 +24,13 @@ return {
     'chrishrb/gx.nvim',
     event = { 'BufEnter' },
     dependencies = { 'nvim-lua/plenary.nvim' },
+    init = function()
+      vim.g.netrw_nogx = 1 -- disable netrw gx
+    end,
     config = true, -- default settings
+    keys = {
+      { 'gx', '<cmd>Browse<cr>', desc = 'Open URL under cursor' },
+    },
   },
   {
     'nvim-pack/nvim-spectre',
