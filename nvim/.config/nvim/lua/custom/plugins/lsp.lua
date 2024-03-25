@@ -104,6 +104,13 @@ return {
         },
       }
 
+      lspconfig.eslint.setup {
+        root_dir = function(p)
+          local path = lspconfig.util.root_pattern('.esprintrc', '.prettierrc', 'nx.json')(p)
+          return path
+        end,
+      }
+
       lsp_zero.setup()
       require('lsp-zero.cmp').extend()
 
