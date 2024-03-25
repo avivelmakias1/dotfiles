@@ -31,19 +31,19 @@ return {
 
           javascript = {
             require('formatter.filetypes.javascript').prettierd,
-            require('formatter.filetypes.javascript').eslint_d,
+            -- require('formatter.filetypes.javascript').eslint_d,
           },
           typescript = {
             require('formatter.filetypes.javascript').prettierd,
-            require('formatter.filetypes.javascript').eslint_d,
+            -- require('formatter.filetypes.javascript').eslint_d,
           },
           javascriptreact = {
             require('formatter.filetypes.javascript').prettierd,
-            require('formatter.filetypes.javascript').eslint_d,
+            -- require('formatter.filetypes.javascript').eslint_d,
           },
           typescriptreact = {
             require('formatter.filetypes.javascript').prettierd,
-            require('formatter.filetypes.javascript').eslint_d,
+            -- require('formatter.filetypes.javascript').eslint_d,
           },
 
           toml = {
