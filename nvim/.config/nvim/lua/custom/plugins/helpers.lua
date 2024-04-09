@@ -11,6 +11,13 @@ return {
     end,
   },
   {
+    'ggandor/leap.nvim',
+    lazy = false,
+    keys = {
+      {"<cr>", "<Plug>(leap)", desc = "Leap"},
+    },
+  },
+  {
     'max397574/better-escape.nvim',
     event = 'InsertEnter',
     config = function()
