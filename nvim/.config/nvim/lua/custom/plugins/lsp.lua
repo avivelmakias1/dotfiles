@@ -106,7 +106,7 @@ return {
 
       lspconfig.eslint.setup {
         root_dir = function(p)
-          local path = lspconfig.util.root_pattern('.esprintrc', '.prettierrc', 'nx.json')(p)
+          local path = lspconfig.util.root_pattern('nx.json', '.esprintrc', '.prettierrc')(p)
           return path
         end,
       }
