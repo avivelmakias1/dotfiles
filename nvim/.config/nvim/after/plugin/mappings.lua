@@ -16,11 +16,10 @@ vim.keymap.set('i', '<C-j>', '<Down>')
 vim.keymap.set('i', '<C-k>', '<Up>')
 vim.keymap.set('i', '<C-l>', '<Right>')
 
-vim.keymap.set('n', 'ha', '<cmd>lua require("harpoon.mark").add_file()<cr>', { desc = 'Add mark'})
-vim.keymap.set('n', 'hv', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', { desc = 'Show all marks'})
-vim.keymap.set('n', 'hd', '<cmd>lua require("harpoon.ui").nav_prev()<cr>', { desc = 'Show all marks'})
-vim.keymap.set('n', 'hf', '<cmd>lua require("harpoon.ui").nav_next()<cr>', { desc = 'Show all marks'})
-
+vim.keymap.set('n', 'ha', '<cmd>lua require("harpoon.mark").add_file()<cr>', { desc = 'Add mark' })
+vim.keymap.set('n', 'hv', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', { desc = 'Show all marks' })
+vim.keymap.set('n', 'hd', '<cmd>lua require("harpoon.ui").nav_prev()<cr>', { desc = 'Show all marks' })
+vim.keymap.set('n', 'hf', '<cmd>lua require("harpoon.ui").nav_next()<cr>', { desc = 'Show all marks' })
 
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
@@ -84,9 +83,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('n', '<leader>qa', '<cmd>qa<cr>', { desc = 'Quit All' })
 
 -- Format Related
-vim.keymap.set('n', '<leader>lf', function()
-  vim.cmd [[Format]]
-end, { desc = 'Format' })
+vim.keymap.set('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format()<cr>', { desc = 'Format' })
 
 vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', { desc = 'LSP Definition' })
 vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', { desc = 'LSP Implementation' })
