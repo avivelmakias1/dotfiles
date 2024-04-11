@@ -46,4 +46,8 @@ vim.o.scrolloff = 10
 
 vim.o.clipboard = 'unnamedplus'
 
+-- Split windows configuration
+vim.o.splitright = true
+vim.o.splitbelow = true
+
 vim.cmd [[colorscheme catppuccin-frappe]]
