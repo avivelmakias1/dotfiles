@@ -15,7 +15,7 @@ return {
       { 'hrsh7th/nvim-cmp' },
       { 'hrsh7th/cmp-nvim-lsp' },
       { 'hrsh7th/cmp-buffer' }, -- Required
-      { 'hrsh7th/cmp-path' }, -- Required
+      { 'hrsh7th/cmp-path' },   -- Required
       {
         'L3MON4D3/LuaSnip',
         build = (function()
@@ -129,8 +129,8 @@ return {
         formatting = {
           fields = { 'kind', 'abbr', 'menu' },
           format = lspkind.cmp_format {
-            mode = 'symbol', -- show only symbol annotations
-            maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+            mode = 'symbol',       -- show only symbol annotations
+            maxwidth = 50,         -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
             ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
 
             -- The function below will be called before any actual modifications from lspkind
@@ -181,6 +181,13 @@ return {
       cmp.event:on('menu_closed', function()
         vim.b.copilot_suggestion_hidden = false
       end)
+
+      cmp.setup.filetype({ 'sql' }, {
+        sources = {
+          { name = 'vim-dadbod-completion' },
+          { name = 'buffer' },
+        },
+      })
     end,
   },
   {
