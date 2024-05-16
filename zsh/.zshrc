@@ -1,3 +1,5 @@
+# Most of this config is from "Dreams of Autonomy" video: https://www.youtube.com/watch?v=ud7YxC33Z3w
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -38,6 +40,7 @@ zinit snippet OMZP::aws
 zinit snippet OMZP::kubectl
 zinit snippet OMZP::kubectx
 zinit snippet OMZP::command-not-found
+zinit snippet OMZP::nvm
 
 # Load completions
 autoload -Uz compinit && compinit
