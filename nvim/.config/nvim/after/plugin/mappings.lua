@@ -68,8 +68,8 @@ vim.keymap.set('n', '<leader>zm', '<cmd>ZenMode<cr>', { desc = 'Zen Mode' })
 -- vim.keymap.set('v', '<leader>fw', '<cmd>lua require("fzf-lua").grep_visual()<cr>', { desc = 'Word (root dir)' })
 
 -- Diagnostics
-vim.keymap.set('n', '<leader>qq', '<cmd>TroubleToggle document_diagnostics<cr>', { desc = 'Trouble Document' })
-vim.keymap.set('n', '<leader>qw', '<cmd>TroubleToggle workspace_diagnostics<cr>', { desc = 'Trouble Workspace' })
+vim.keymap.set('n', '<leader>qq', '<cmd>Trouble diagnostics toggle filter.buf=0<cr>', { desc = 'Trouble Document' })
+vim.keymap.set('n', '<leader>qw', '<cmd>Trouble diagnostics toggle<cr>', { desc = 'Trouble Workspace' })
 vim.keymap.set('n', '<leader>ql', function()
   vim.diagnostic.config { virtual_text = not require('lsp_lines').toggle() }
 end, {
@@ -83,7 +83,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('n', '<leader>qa', '<cmd>qa<cr>', { desc = 'Quit All' })
 
 -- Format Related
-vim.keymap.set('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format()<cr>', { desc = 'Format' })
+vim.keymap.set('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format({ timeout_ms = 7000 })<cr>', { desc = 'Format' })
 
 vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', { desc = 'LSP Definition' })
 vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', { desc = 'LSP Implementation' })
