@@ -83,7 +83,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('n', '<leader>qa', '<cmd>qa<cr>', { desc = 'Quit All' })
 
 -- Format Related
-vim.keymap.set('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format({ timeout_ms = 7000 })<cr>', { desc = 'Format' })
+vim.keymap.set('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format({ timeout_ms = 7000, filter = function(client) return client.name ~= "tsserver" end })<cr>', { desc = 'Format' })
 
 vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', { desc = 'LSP Definition' })
 vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', { desc = 'LSP Implementation' })
