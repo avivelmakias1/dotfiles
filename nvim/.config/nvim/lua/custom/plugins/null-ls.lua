@@ -38,6 +38,7 @@ return {
         -- null_ls.builtins.formatting.taplo,
         null_ls.builtins.formatting.yamlfmt,
         null_ls.builtins.diagnostics.yamllint,
+        null_ls.builtins.formatting.sqlfmt,
       },
     }
   end,
