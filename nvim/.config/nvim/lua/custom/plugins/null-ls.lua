@@ -39,6 +39,9 @@ return {
         null_ls.builtins.formatting.yamlfmt,
         null_ls.builtins.diagnostics.yamllint,
         null_ls.builtins.formatting.sqlfmt,
+        null_ls.builtins.formatting.gofumpt,
+        null_ls.builtins.formatting.golines,
+        null_ls.builtins.formatting.goimports_reviser,
       },
     }
   end,

@@ -49,6 +49,7 @@ return {
           -- 'pylsp',
           'pyright',
           -- 'ruff_lsp',
+          'gopls',
         },
         handlers = {
           lsp_zero.default_setup,
@@ -102,6 +103,13 @@ return {
             },
           },
         },
+      }
+
+      lspconfig.gopls.setup {
+        root_dir = function(p)
+          local path = lspconfig.util.root_pattern('go.mod')(p)
+          return path
+        end,
       }
 
       -- lspconfig.eslint.setup {
