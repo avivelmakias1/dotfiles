@@ -1,3 +1,5 @@
+-- Unbind weird defaults
+vim.keymap.set({'n', 'x' }, 's', '<Nop>')
 -- vim.keymap.set('n', ';', ':')
 
 -- Keymaps for better default experience
