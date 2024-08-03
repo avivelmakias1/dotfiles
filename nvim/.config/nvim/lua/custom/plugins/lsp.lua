@@ -50,6 +50,7 @@ return {
           'pyright',
           -- 'ruff_lsp',
           'gopls',
+          'clangd',
         },
         handlers = {
           lsp_zero.default_setup,
@@ -111,6 +112,15 @@ return {
                   },
                 },
               },
+            }
+          end,
+          clangd = function()
+            local lspconfig = require 'lspconfig'
+            lspconfig.clangd.setup {
+              on_attach = function(client, bufnr)
+                client.server_capabilities.signatureHelpProvider = false
+                lsp_zero.default_keymaps { buffer = bufnr }
+              end,
             }
           end,
         },
