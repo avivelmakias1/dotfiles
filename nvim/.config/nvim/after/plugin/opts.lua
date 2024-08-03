@@ -23,8 +23,15 @@ vim.o.breakindent = true
 vim.o.undofile = true
 
 -- Case insensitive searching UNLESS /C or capital in search
+vim.o.inccommand = "split"
 vim.o.ignorecase = true
 vim.o.smartcase = true
+
+-- Smart indent
+vim.o.autoindent = true
+vim.o.smartindent = true
+vim.o.expandtab = true
+vim.o.tabstop = 2
 
 -- Keep signcolumn on by default
 vim.wo.signcolumn = 'yes'
@@ -49,3 +56,7 @@ vim.o.splitright = true
 vim.o.splitbelow = true
 
 vim.cmd [[colorscheme catppuccin-frappe]]
+
+vim.o.title = true
+vim.opt.backspace = { "start", "eol", "indent" }
+vim.opt.splitkeep = "cursor"
