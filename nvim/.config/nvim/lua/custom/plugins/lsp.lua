@@ -15,7 +15,7 @@ return {
       { 'hrsh7th/nvim-cmp' },
       { 'hrsh7th/cmp-nvim-lsp' },
       { 'hrsh7th/cmp-buffer' }, -- Required
-      { 'hrsh7th/cmp-path' },   -- Required
+      { 'hrsh7th/cmp-path' }, -- Required
       {
         'L3MON4D3/LuaSnip',
         build = (function()
@@ -53,64 +53,72 @@ return {
         },
         handlers = {
           lsp_zero.default_setup,
+          function(server_name)
+            require('lspconfig')[server_name].setup {}
+          end,
           lua_ls = function()
             local lua_opts = lsp_zero.nvim_lua_ls()
             require('lspconfig').lua_ls.setup(lua_opts)
+          end,
+          pyright = function()
+            local lspconfig = require 'lspconfig'
+            lspconfig.pyright.setup {
+              root_dir = function(p)
+                local path = lspconfig.util.root_pattern('.git', 'setup.cfg', 'requirements.txt')(p)
+                return path
+              end,
+            }
+          end,
+          gopls = function()
+            local lspconfig = require 'lspconfig'
+            lspconfig.gopls.setup {
+              root_dir = function(p)
+                local path = lspconfig.util.root_pattern 'go.mod'(p)
+                return path
+              end,
+            }
+          end,
+          tsserver = function()
+            local lspconfig = require 'lspconfig'
+            lspconfig.tsserver.setup {
+              root_dir = function(p)
+                local path = lspconfig.util.root_pattern('.prettierrc', 'nx.json', 'tsconfig.base.json')(p)
+                return path
+              end,
+              settings = {
+                typescript = {
+                  inlayHints = {
+                    includeInlayParameterNameHints = 'all',
+                    includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                    includeInlayFunctionParameterTypeHints = true,
+                    includeInlayVariableTypeHints = true,
+                    includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+                    includeInlayPropertyDeclarationTypeHints = true,
+                    includeInlayFunctionLikeReturnTypeHints = true,
+                    includeInlayEnumMemberValueHints = true,
+                  },
+                },
+                javascript = {
+                  inlayHints = {
+                    includeInlayParameterNameHints = 'all',
+                    includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                    includeInlayFunctionParameterTypeHints = true,
+                    includeInlayVariableTypeHints = true,
+                    includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+                    includeInlayPropertyDeclarationTypeHints = true,
+                    includeInlayFunctionLikeReturnTypeHints = true,
+                    includeInlayEnumMemberValueHints = true,
+                  },
+                },
+              },
+            }
           end,
         },
       }
       -- This is where all the LSP shenanigans will live
 
-      local lspconfig = require 'lspconfig'
-
       -- -- (Optional) Configure lua language server for neovim
       -- lspconfig.lua_ls.setup(lsp_zero.nvim_lua_ls())
-
-      lspconfig.pyright.setup {
-        root_dir = function(p)
-          local path = lspconfig.util.root_pattern('.git', 'setup.cfg', 'requirements.txt')(p)
-          return path
-        end,
-      }
-      lspconfig.tsserver.setup {
-        root_dir = function(p)
-          local path = lspconfig.util.root_pattern('.prettierrc', 'nx.json', 'tsconfig.base.json')(p)
-          return path
-        end,
-        settings = {
-          typescript = {
-            inlayHints = {
-              includeInlayParameterNameHints = 'all',
-              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayVariableTypeHints = true,
-              includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includeInlayEnumMemberValueHints = true,
-            },
-          },
-          javascript = {
-            inlayHints = {
-              includeInlayParameterNameHints = 'all',
-              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayVariableTypeHints = true,
-              includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includeInlayEnumMemberValueHints = true,
-            },
-          },
-        },
-      }
-
-      lspconfig.gopls.setup {
-        root_dir = function(p)
-          local path = lspconfig.util.root_pattern('go.mod')(p)
-          return path
-        end,
-      }
 
       -- lspconfig.eslint.setup {
       --   root_dir = function(p)
@@ -137,8 +145,8 @@ return {
         formatting = {
           fields = { 'kind', 'abbr', 'menu' },
           format = lspkind.cmp_format {
-            mode = 'symbol',       -- show only symbol annotations
-            maxwidth = 50,         -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+            mode = 'symbol', -- show only symbol annotations
+            maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
             ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
 
             -- The function below will be called before any actual modifications from lspkind
