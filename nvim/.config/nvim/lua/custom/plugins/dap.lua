@@ -105,6 +105,12 @@ return {
         version = '1.x',
         build = 'npm i && npm run compile vsDebugServerBundle && mv dist out',
       },
+      {
+        'leoluz/nvim-dap-go',
+        config = function()
+          require('dap-go').setup()
+        end,
+      }
     },
     config = function()
       local dap, dapui = require 'dap', require 'dapui'
@@ -121,6 +127,12 @@ return {
       --     require('dap.ext.autocompl').attach()
       --   end,
       -- })
+      require('which-key').add {
+        { '<leader>db', group = '+breakpoints' },
+        { '<leader>ds', group = '+steps' },
+        { '<leader>dv', group = '+views' },
+      }
+
       -- Setup dap for javascript
       require('dap-vscode-js').setup {
         debugger_path = vim.fn.stdpath 'data' .. '/lazy/vscode-js-debug',
@@ -168,18 +180,18 @@ return {
           },
           -- only if language is javascript, offer this debug action
           language == 'javascript'
-              and {
-                -- use nvim-dap-vscode-js's pwa-node debug adapter
-                type = 'pwa-node',
-                -- launch a new process to attach the debugger to
-                request = 'launch',
-                -- name of the debug action you have to select for this config
-                name = 'Launch file in new node process',
-                -- launch current file
-                program = '${file}',
-                cwd = '${workspaceFolder}',
-              }
-            or nil,
+          and {
+            -- use nvim-dap-vscode-js's pwa-node debug adapter
+            type = 'pwa-node',
+            -- launch a new process to attach the debugger to
+            request = 'launch',
+            -- name of the debug action you have to select for this config
+            name = 'Launch file in new node process',
+            -- launch current file
+            program = '${file}',
+            cwd = '${workspaceFolder}',
+          }
+          or nil,
         }
       end
 
