@@ -41,6 +41,15 @@ return {
       large_file_overrides = {
         providers = { 'lsp' },
       },
+
+      keys = {
+        ['<c-w>>'] = function(win)
+          win:resize('width', 20)
+        end,
+        ['<c-w><'] = function(win)
+          win:resize('width', -20)
+        end,
+      },
     },
     config = function(_, opts)
       require('illuminate').configure(opts)
