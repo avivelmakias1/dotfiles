@@ -23,6 +23,10 @@ return {
         { '<leader>q',  group = '+diagnostics' },
         { '<leader>l',  group = '+lsp' },
         { '<leader>t',  group = '+toggles' },
+        { '<leader>db', group = '+breakpoints' },
+        { '<leader>ds', group = '+steps' },
+        { '<leader>dv', group = '+views' },
+        { '<leader>r',  group = '+run' },
       }
     end,
   },

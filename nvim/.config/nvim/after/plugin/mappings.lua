@@ -1,5 +1,5 @@
 -- Unbind weird defaults
-vim.keymap.set({'n', 'x' }, 's', '<Nop>')
+vim.keymap.set({ 'n', 'x' }, 's', '<Nop>')
 -- vim.keymap.set('n', ';', ':')
 
 -- Keymaps for better default experience
@@ -80,13 +80,18 @@ end, {
 })
 
 -- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+-- vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+-- vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 vim.keymap.set('n', '<leader>qa', '<cmd>qa<cr>', { desc = 'Quit All' })
 
 -- Format Related
-vim.keymap.set('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format({ timeout_ms = 7000, filter = function(client) return client.name ~= "tsserver" end })<cr>', { desc = 'Format' })
+vim.keymap.set(
+  'n',
+  '<leader>lf',
+  '<cmd>lua vim.lsp.buf.format({ timeout_ms = 7000, filter = function(client) return client.name ~= "tsserver" end })<cr>',
+  { desc = 'Format' }
+)
 
 vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', { desc = 'LSP Definition' })
 vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', { desc = 'LSP Implementation' })
@@ -103,5 +108,8 @@ vim.keymap.set('n', '<leader>gdh', '<cmd>diffget //2<cr>', { desc = 'Git Diff Ge
 vim.keymap.set('n', '<leader>gdl', '<cmd>diffget //3<cr>', { desc = 'Git Diff Get Right' })
 vim.keymap.set('n', '<leader>gdc', '<cmd>only<cr>', { desc = 'Git Diff Close' })
 
--- vim.keymap.set('n', '<leader>/', 'gcc', { desc = "Comment Line"})
--- vim.keymap.set('v', '<leader>/', 'gc', { desc = "Comment Line"})
+vim.keymap.set('n', '<leader>rtt', '<cmd>lua require("neotest").run.run()<cr>', { desc = 'Run Closest Test' })
+vim.keymap.set('n', '<leader>rtf', '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<cr>',
+  { desc = 'Run File Test' })
+vim.keymap.set('n', '<leader>rtd', '<cmd>lua require("neotest").run.run({strategy = "dap"})<cr>',
+  { desc = 'Run Debug Test' })
