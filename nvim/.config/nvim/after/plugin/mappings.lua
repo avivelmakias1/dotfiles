@@ -113,3 +113,5 @@ vim.keymap.set('n', '<leader>rtf', '<cmd>lua require("neotest").run.run(vim.fn.e
   { desc = 'Run File Test' })
 vim.keymap.set('n', '<leader>rtd', '<cmd>lua require("neotest").run.run({strategy = "dap"})<cr>',
   { desc = 'Run Debug Test' })
+
+vim.keymap.set("n", "<leader>sl", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Reword In Current File' })
