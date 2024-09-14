@@ -4,6 +4,17 @@
 
 return {
   {
+    'kdheepak/lazygit.nvim',
+    event = 'VeryLazy',
+    keys = {
+      {
+        '<leader>lg',
+        '<cmd>LazyGit<cr>',
+        desc = 'Lazygit',
+      },
+    },
+  },
+  {
     'lewis6991/gitsigns.nvim',
     opts = {
       on_attach = function(bufnr)
