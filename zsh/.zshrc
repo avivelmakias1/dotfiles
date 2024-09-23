@@ -85,6 +85,6 @@ else
     fi
 fi
 unset __conda_setup
-conda activate grip
+conda activate poetry 
 # <<< conda initialize <<<
 
