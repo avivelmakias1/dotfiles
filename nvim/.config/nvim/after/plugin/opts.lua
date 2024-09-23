@@ -71,5 +71,4 @@ vim.o.termguicolors = true
 -- I hate wrapping text
 vim.o.wrap = false
 
-
-vim.cmd[[colorscheme dracula]]
+vim.cmd [[colorscheme catppuccin-frappe]]
