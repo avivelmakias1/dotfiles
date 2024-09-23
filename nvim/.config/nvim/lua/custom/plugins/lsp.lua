@@ -145,12 +145,12 @@ return {
             return path
           end,
         },
-        gopls = {
-          root_dir = function(p)
-            local path = lspconfig.util.root_pattern 'go.mod'(p)
-            return path
-          end,
-        },
+        -- gopls = {
+        --   root_dir = function(p)
+        --     local path = lspconfig.util.root_pattern 'go.mod'(p)
+        --     return path
+        --   end,
+        -- },
         -- clangd = {},
         -- pyright = {},
         -- rust_analyzer = {},
@@ -236,9 +236,9 @@ return {
         'yamlfmt',
         'yamllint',
         -- hobby
-        'gopls',
-        'goimports-reviser',
-        'golines',
+        -- 'gopls',
+        -- 'goimports-reviser',
+        -- 'golines',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
