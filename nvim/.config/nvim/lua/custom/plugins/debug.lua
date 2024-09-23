@@ -23,6 +23,7 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+    'mfussenegger/nvim-dap-python',
   },
   keys = function(_, keys)
     local dap = require 'dap'
@@ -103,5 +104,9 @@ return {
         detached = vim.fn.has 'win32' == 0,
       },
     }
+    -- Install python specific config
+    local mason_path = vim.fn.glob(vim.fn.stdpath 'data' .. '/mason/')
+    require('dap-python').setup(mason_path .. 'packages/debugpy/venv/bin/python')
+    require('dap-python').test_runner = 'pytest'
   end,
 }
