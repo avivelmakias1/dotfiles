@@ -25,6 +25,9 @@ return {
         visible = true,
         hide_hidden = false,
       },
+      follow_current_file = {
+        enabled = true,
+      },
     },
   },
 }
