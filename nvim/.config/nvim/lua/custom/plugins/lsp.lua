@@ -160,7 +160,7 @@ return {
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        tsserver = {
+        ts_ls = {
           root_dir = function(p)
             local path = lspconfig.util.root_pattern('.prettierrc', 'nx.json', 'tsconfig.base.json')(p)
             return path
@@ -232,7 +232,7 @@ return {
         'shfmt',
         'sqlfmt',
         'taplo',
-        'tsserver',
+        'ts_ls',
         'yamlfmt',
         'yamllint',
         -- hobby
