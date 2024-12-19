@@ -68,4 +68,5 @@ return {
       { '[[', desc = 'Prev Reference' },
     },
   },
+  { 'kevinhwang91/nvim-bqf', ft = 'qf' },
 }
