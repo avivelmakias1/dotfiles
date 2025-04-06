@@ -3,6 +3,6 @@ vim.lsp.enable {
   'lua',
   'go',
   'yaml',
-  'python',
+  'pyright',
   'vtsls',
 }
