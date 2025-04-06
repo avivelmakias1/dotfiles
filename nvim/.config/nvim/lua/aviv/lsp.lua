@@ -4,5 +4,5 @@ vim.lsp.enable {
   'go',
   'yaml',
   'python',
-  -- 'vtsls',
+  'vtsls',
 }
