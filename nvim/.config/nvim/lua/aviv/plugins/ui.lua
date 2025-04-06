@@ -19,7 +19,7 @@ return {
         desc = 'Workspace Diagnostics',
       },
       {
-        '<leader>q',
+        '<leader>qq',
         '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
         desc = 'Buffer Diagnostics',
       },
