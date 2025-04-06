@@ -46,6 +46,22 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
     -- [[ Configure Telescope ]]
     -- See `:help telescope` and `:help telescope.setup()`
+    function vim.getVisualSelection()
+      local current_clipboard_content = vim.fn.getreg '"'
+
+      vim.cmd 'noau normal! "vy"'
+      local text = vim.fn.getreg 'v'
+      vim.fn.setreg('v', {})
+
+      vim.fn.setreg('"', current_clipboard_content)
+
+      text = string.gsub(text, '\n', '')
+      if #text > 0 then
+        return text
+      else
+        return ''
+      end
+    end
     require('telescope').setup {
       -- You can put your default mappings / updates / etc. in here
       --  All the info you're looking for is in `:help telescope.setup()`
@@ -79,7 +95,10 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
     vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
     vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-    vim.keymap.set('v', '<leader>sw', builtin.grep_string, { desc = '[S]earch highlighted [W]ord' })
+    vim.keymap.set('v', '<leader>sw', function()
+      local text = vim.getVisualSelection()
+      builtin.grep_string { search = text }
+    end, { desc = '[S]earch highlighted [W]ord' })
     vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
     vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
     vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
