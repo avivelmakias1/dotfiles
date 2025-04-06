@@ -93,8 +93,8 @@ vim.diagnostic.config {
     -- },
   },
   virtual_text = true,
-  virtual_lines = false,
-  -- virtual_lines = {
-  --     current_line = true,
-  -- },
+  -- virtual_lines = false,
+  virtual_lines = {
+      current_line = true,
+  },
 }
