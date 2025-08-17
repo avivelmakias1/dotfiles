@@ -11,11 +11,13 @@ return {
       local ensure_installed = vim.tbl_keys {}
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
-        'pyright',
-        'black',
+        -- 'pyright',
+        'basedpyright',
+        'ruff',
+        -- 'black',
+        -- 'isort',
         'debugpy',
         'eslint_d',
-        'isort',
         'prettier',
         'shfmt',
         'sqlfmt',

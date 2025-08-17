@@ -35,6 +35,7 @@ return {
       formatters_by_ft = {
         lua = { 'stylua' },
         sql = { 'sqlfmt' },
+        python = { 'ruff_fix', 'ruff_format', 'ruff_organize_imports' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -51,6 +52,7 @@ return {
       local lint = require 'lint'
       lint.linters_by_ft = {
         markdown = { 'markdownlint' },
+        python = { 'ruff' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
