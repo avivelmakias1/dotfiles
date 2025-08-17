@@ -36,6 +36,9 @@ return {
         lua = { 'stylua' },
         sql = { 'sqlfmt' },
         python = { 'ruff_fix', 'ruff_format', 'ruff_organize_imports' },
+        javascript = { 'prettierd', 'prettier', stop_after_first = true },
+        typescript = { 'prettierd', 'prettier', stop_after_first = true },
+
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -53,6 +56,8 @@ return {
       lint.linters_by_ft = {
         markdown = { 'markdownlint' },
         python = { 'ruff' },
+        javascript = { 'eslint_d' },
+        typescript = { 'eslint_d' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
