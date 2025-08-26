@@ -36,8 +36,8 @@ return {
         lua = { 'stylua' },
         sql = { 'sqlfmt' },
         python = { 'ruff_fix', 'ruff_format', 'ruff_organize_imports' },
-        javascript = { 'prettierd', 'prettier', stop_after_first = true },
-        typescript = { 'prettierd', 'prettier', stop_after_first = true },
+        -- javascript = { 'prettierd' },
+        -- typescript = { 'prettierd' },
 
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
@@ -56,8 +56,8 @@ return {
       lint.linters_by_ft = {
         markdown = { 'markdownlint' },
         python = { 'ruff' },
-        javascript = { 'eslint_d' },
-        typescript = { 'eslint_d' },
+        -- javascript = { 'eslint_d' },
+        -- typescript = { 'eslint_d' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
@@ -101,6 +101,51 @@ return {
           lint.try_lint()
         end,
       })
+    end,
+  },
+  {
+    'nvimtools/none-ls.nvim',
+    dependencies = {
+      'nvimtools/none-ls-extras.nvim',
+    },
+    config = function()
+      local null_ls = require 'null-ls'
+
+      -- Replacement for lspconfig.util.root_pattern
+      local function root_pattern(...)
+        local patterns = { ... }
+        return function(path)
+          local found = vim.fs.find(patterns, {
+            path = path,
+            upward = true,
+          })
+          return found[1] and vim.fs.dirname(found[1]) or nil
+        end
+      end
+
+      null_ls.setup {
+        sources = {
+          null_ls.builtins.formatting.prettier,
+          require('none-ls.diagnostics.eslint_d').with {
+            cwd = function(params)
+              -- falls back to root if return value is nil
+              return root_pattern('nx.json', '.esprintrc', '.prettierrc')(params.bufname)
+            end,
+          },
+          require('none-ls.formatting.eslint_d').with {
+            cwd = function(params)
+              -- falls back to root if return value is nil
+              return root_pattern('nx.json', '.esprintrc', '.prettierrc')(params.bufname)
+            end,
+          },
+          require('none-ls.code_actions.eslint_d').with {
+            cwd = function(params)
+              -- falls back to root if return value is nil
+              return root_pattern('nx.json', '.esprintrc', '.prettierrc')(params.bufname)
+            end,
+          },
+        },
+      }
     end,
   },
 }
