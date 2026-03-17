@@ -16,6 +16,10 @@ return { -- Highlight, edit, and navigate code
     },
     indent = { enable = true, disable = { 'ruby' } },
   },
+  config = function(_, opts)
+    require("nvim-treesitter.configs").setup(opts)
+    -- You can add additional configuration here
+  end,
   -- There are additional nvim-treesitter modules that you can use to interact
   -- with nvim-treesitter. You should go explore a few and see what interests you:
   --

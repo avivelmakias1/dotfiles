@@ -26,9 +26,9 @@ return {
         'yamlfmt',
         'yamllint',
         -- hobby
-        'gopls',
-        'goimports-reviser',
-        'golines',
+        -- 'gopls',
+        -- 'goimports-reviser',
+        -- 'golines',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
     end,
