@@ -1,7 +1,8 @@
--- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
+-- Avoid Python provider detection hangs from the built-in python ftplugin.
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_python_provider = 0
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-require 'aviv'
+require 'config'

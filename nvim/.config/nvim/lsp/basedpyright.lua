@@ -1,16 +1,22 @@
+local util = require 'config.util'
+
 return {
-  cmd = { 'basedpyright-langserver', '--stdio' },
+  cmd = { util.executable 'basedpyright-langserver' or 'basedpyright-langserver', '--stdio' },
   filetypes = { 'python' },
   root_markers = {
-    '.git',
-    'setup.cfg',
-    'requirements.txt',
+    'pyproject.toml',
     'ruff.toml',
-    '.python-version',
+    '.ruff.toml',
+    'uv.lock',
+    'requirements.txt',
+    '.git',
   },
   settings = {
-    basedpython = {
+    basedpyright = {
+      disableOrganizeImports = true,
       analysis = {
+        typeCheckingMode = 'standard',
+        diagnosticMode = 'openFilesOnly',
         autoSearchPaths = true,
         useLibraryCodeForTypes = true,
       },

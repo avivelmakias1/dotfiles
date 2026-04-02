@@ -1,0 +1,30 @@
+return function()
+  require('nvim-treesitter.config').setup {
+    ensure_installed = {
+      'bash',
+      'css',
+      'html',
+      'javascript',
+      'jsdoc',
+      'json',
+      'jsonc',
+      'lua',
+      'luadoc',
+      'markdown',
+      'markdown_inline',
+      'python',
+      'query',
+      'regex',
+      'toml',
+      'tsx',
+      'typescript',
+      'vim',
+      'vimdoc',
+      'vue',
+      'yaml',
+    },
+    auto_install = false,
+    highlight = { enable = true },
+    indent = { enable = true },
+  }
+end
