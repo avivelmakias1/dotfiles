@@ -1,0 +1,7 @@
+# Refresh with:
+#   source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
+#   antidote bundle < ~/.config/zsh/plugins.txt > ~/.cache/zsh/plugins.zsh
+mattmc3/ez-compinit
+Aloxaf/fzf-tab
+zsh-users/zsh-autosuggestions kind:defer
+zdharma-continuum/fast-syntax-highlighting kind:defer

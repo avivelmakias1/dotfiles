@@ -38,6 +38,11 @@ nvim.*
 iterm2
 lazygit
 
+# Local zsh state
+zsh/.zshrc.backup.*
+zsh/.config/zsh/local.env.zsh
+zsh/.config/zsh/local.zsh
+
 # Dont look
 karabiner
 emacs
